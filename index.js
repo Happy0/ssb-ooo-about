@@ -8,17 +8,17 @@ module.exports = function AboutOOO(server, opts) {
   return {
     async: {
       getLatestMsgIds: (id, cb) => getLatestMsgIds(server, id, cb),
-      getLatestNameMsgIds: (id, cb) => getLatestNameMsgIds(server, id, cb),
-      getLatestDescriptionMsgIds: (id, cb) => getLatestIds(server, id, cb),
-      getLatestPictureMsgsIds: (id, cb) => getLatestIds(server, id, cb)
+      getLatestNameMsgId: (id, cb) => getLatestNameMsgId(server, id, cb),
+      getLatestDescriptionMsgId: (id, cb) => getLatestIds(server, id, cb),
+      getLatestPictureMsgsId: (id, cb) => getLatestIds(server, id, cb)
     }
   }
 }
 
 function getLatestMsgIds(server, id, cb) {
-  var latestName = Promise.promisify(getLatestNameMsgIds);
-  var latestDescription = Promise.promisify(getLatestDescriptionMsgIds);
-  var latestPicture = Promise.promisify(getLatestPictureMsgsIds);
+  var latestName = Promise.promisify(getLatestNameMsgId);
+  var latestDescription = Promise.promisify(getLatestDescriptionMsgId);
+  var latestPicture = Promise.promisify(getLatestPictureMsgsId);
 
   var idsPromise = Promise.all(
     [
@@ -31,19 +31,19 @@ function getLatestMsgIds(server, id, cb) {
   return idsPromise.then(ids => unique(ids).filter(id => id != null)).asCallback(cb);
 }
 
-function getLatestNameMsgIds(server, id, cb) {
+function getLatestNameMsgId(server, id, cb) {
   var aboutStream = getAboutStream(server, id);
 
   pull(aboutStream, findKeyInStream(msg => msg.value.content.name, cb));
 }
 
-function getLatestDescriptionMsgIds(server, id, cb) {
+function getLatestDescriptionMsgId(server, id, cb) {
   var aboutStream = getAboutStream(server, id);
 
   pull(aboutStream, findKeyInStream(msg => msg.value.content.description, cb));
 }
 
-function getLatestPictureMsgsIds(server, id, cb) {
+function getLatestPictureMsgsId(server, id, cb) {
   var aboutStream = getAboutStream(server, id);
 
   pull(aboutStream, findKeyInStream(msg => msg.value.content.image, cb));

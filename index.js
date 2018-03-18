@@ -54,7 +54,7 @@ function findKeyInStream(findFn, cb) {
     if (err) {
       cb(err);
     } else {
-      cb(err, result.key);
+      cb(err, result ? result.key : null);
     }
   })
 }

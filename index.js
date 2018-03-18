@@ -3,6 +3,8 @@ var pull = require('pull-stream');
 var unique = require("array-unique").immutable;
 
 module.exports = function AboutOOO(server, opts) {
+  if (!server.links) throw new Error('ssb-ooo-about requires you to have the ssb-links plugin installed')
+
   return {
     async: {
       getLatestMsgIds: (id, cb) => getLatestMsgIds(server, id, cb),

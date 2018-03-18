@@ -1,0 +1,17 @@
+{
+  "name": "ssb-ooo-about",
+  "version": "1.0.0",
+  "description": "A library to get the IDs for a user's latest name, description and display image messages to attach to a scuttlebutt message in the 'branch' field to support ssb-ooo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "array-unique": "^0.3.2",
+    "bluebird": "^3.5.1",
+    "pull-stream": "^3.6.2",
+    "ssb-client": "^4.5.7"
+  }
+}
